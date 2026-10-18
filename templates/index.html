@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1224">
+    <title>Water Intake Coach</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-icon">💧</div>
+                <div>
+                    <h1>Water Intake Coach</h1>
+                    <p>Your daily hydration companion</p>
+                </div>
+            </div>
+            <button class="reset-btn" id="resetBtn">↻ <span>Reset day</span></button>
+        </header>
+
+        <main class="dashboard">
+            <section class="chat-panel">
+                <div class="chat-heading">
+                    <div>
+                        <h2>Your hydration assistant</h2>
+                        <p><span class="online-dot"></span> Ready to help you hydrate</p>
+                    </div>
+                    <span class="bot-avatar">💧</span>
+                </div>
+
+                <div id="chatMessages" class="chat-messages" aria-live="polite">
+                    <div class="message bot-message">
+                        <div class="message-avatar">💧</div>
+                        <div class="bubble">
+                            <div class="message-author">Water Coach</div>
+                            Hey! 👋 I'm your Water Intake Coach. Tell me how much water
+                            you've had, or ask me about your daily progress.
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suggestions">
+                    <button class="suggestion" data-message="I drank 250 ml of water">🥤 Log 250 ml</button>
+                    <button class="suggestion" data-message="I drank 500 ml of water">💧 Log 500 ml</button>
+                    <button class="suggestion" data-message="How much water do I have left?">📊 Check progress</button>
+                </div>
+
+                <form id="chatForm" class="composer">
+                    <label for="messageInput" class="sr-only">Your message</label>
+                    <textarea id="messageInput" rows="1" placeholder="Message your coach… e.g. I drank half a litre"
+                        maxlength="1000"></textarea>
+                    <button type="submit" id="sendBtn" aria-label="Send message">➤</button>
+                </form>
+                <p class="composer-note">Enter to send · Shift + Enter for a new line</p>
+            </section>
+
+            <aside class="sidebar">
+                <section class="panel progress-panel">
+                    <div class="panel-title">
+                        <h2>Today's progress</h2>
+                        <span class="tiny-icon">◉</span>
+                    </div>
+
+                    <div class="progress-ring" id="progressRing">
+                        <div class="ring-content">
+                            <strong id="consumedRing">0 ml</strong>
+                            <span>of <span id="goalRing">2500</span> ml</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-icon">🥤</span>
+                            <strong id="consumedStat">0 ml</strong>
+                            <span>Consumed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">🎯</span>
+                            <strong id="goalStat">2500 ml</strong>
+                            <span>Daily goal</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">💧</span>
+                            <strong id="remainingStat">2500 ml</strong>
+                            <span>Remaining</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-caption">
+                        <span id="progressPercent">0% completed</span>
+                        <span id="goalMessage">You've got this!</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-fill"></div>
+                    </div>
+                </section>
+
+                <section class="panel quick-panel">
+                    <h2>⚡ Quick actions</h2>
+                    <div class="quick-grid">
+                        <button class="quick-btn" data-amount="100">+100 ml</button>
+                        <button class="quick-btn" data-amount="250">+250 ml</button>
+                        <button class="quick-btn" data-amount="500">+500 ml</button>
+                        <button class="quick-btn" data-amount="750">+750 ml</button>
+                        <button class="quick-btn" data-amount="1000">+1 litre</button>
+                        <button class="quick-btn secondary" id="checkProgressBtn">📊 Progress</button>
+                    </div>
+                </section>
+
+                <section class="panel tips-panel">
+                    <h2>💡 Hydration tips</h2>
+                    <ul>
+                        <li>Drink water regularly throughout the day.</li>
+                        <li>Keep a water bottle nearby.</li>
+                        <li>Adjust your intake for heat and activity.</li>
+                        <li>Listen to your body's thirst signals.</li>
+                        <li>Use natural language to log your water.</li>
+                    </ul>
+                    <p class="tip-disclaimer">Your 2500 ml goal is a configurable demo target, not a universal medical
+                        requirement.</p>
+                </section>
+            </aside>
+        </main>
+
+        <footer>Water Intake Coach · Agentic AI project</footer>
+    </div>
+
+    <div id="toast" class="toast" role="status"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
